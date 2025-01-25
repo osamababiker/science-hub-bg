@@ -110,6 +110,7 @@ class TeachersController extends Controller
             'sub_of' => 'required|string'
         ]);
         $teacher = Teacher::findOrFail($id);
+
         if($request->has('image')){
             if(file_exists(public_path('upload/teachers/'.$teacher->image))){
                 unposition(public_path('upload/teachers/'.$teacher->image));
@@ -119,6 +120,10 @@ class TeachersController extends Controller
             $image->move(public_path('upload/teachers'),$image_name);
         }else{
             $image_name = $teacher->image;
+        }
+
+        if($request->isFeatured == 1){
+            $teachers = Teacher::where('isFeatured', 1)->update(['isFeatured' => 0]);
         }
 
         $teacher->en_name = $request->en_name;
@@ -131,11 +136,13 @@ class TeachersController extends Controller
         $teacher->en_desc = $request->en_desc;
         $teacher->ar_desc = $request->ar_desc;
         $teacher->sub_of = $request->sub_of;
+        $teacher->isFeatured = $request->isFeatured;
         $teacher->image = $image_name;
         $teacher->save();
 
         return redirect()->back()->with('feedback', 'teacher has been updated');
     }
+
 
     /**
      * Remove the specified resource from storage.

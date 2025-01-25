@@ -14,6 +14,10 @@ class Category extends Model
         return $this->hasMany(Blog::class, 'sub_of');
     }
 
+    public function courses(){
+        return $this->hasMany(Course::class, 'sub_of');
+    }
+
     public function teachers(){
         return $this->hasMany(Teacher::class, 'sub_of');
     }

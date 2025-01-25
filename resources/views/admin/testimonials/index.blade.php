@@ -15,8 +15,8 @@
             <!-- Orders accordion-->
             <section class="card border-0 mb-4" id="tables-color-borders">
               <div class="card-body pb-0 d-flex justify-content-between ">
-                <h2 class="h4 mb-n2">Experts list</h2>
-                <a class="btn btn-light" href="{{ route('admin.experts.create') }}"> <i class="ai-plus text-primary"></i> </a>
+                <h2 class="h4 mb-n2">testimonials list</h2>
+                <a class="btn btn-light" href="{{ route('admin.testimonials.create') }}"> <i class="ai-plus text-primary"></i> </a>
               </div>
               <div class="card-body">
                 <div class="tab-content">
@@ -26,47 +26,41 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th> name</th>
-                      <th> position </th>
-                      <th> picture </th>
-                      <th> resume </th>
+                      <th> title</th>
+                      <th> course </th>
+                      <th> user </th>
                       <th>Created at</th>
                       <th>Settings</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($experts as $expert)
+                    @foreach($testimonials as $testimonial)
                     <tr>
-                      <th scope="row">{{ $expert->id }}</th>
-                      <td>{{ $expert->name }}</td>
-                      <td>{{ $expert->position }}</td>
-                      <td> <img src="{{ asset('upload/experts/' . $expert->picture) }}" width="50" height="50" alt=""> </td>
-                      <td> 
-                      @if($expert->resume)  
-                      <a href="{{ asset('upload/experts/' . $expert->resume) }}"> resume </a> 
-                      @endif
-                      </td>
-                      <td>{{ $expert->created_at->diffForHumans() }}</td>
+                      <th scope="row">{{ $testimonial->id }}</th>
+                      <td>{{ $testimonial->en_title }}</td>
+                      <td>{{ $testimonial->course->en_name }}</td>
+                      <td>{{ $testimonial->user->name }}</td>
+                      <td>{{ $testimonial->created_at->diffForHumans() }}</td>
                       <td>
-                        <a  href="{{ route('admin.experts.edit', ['expert' => $expert->id]) }}"> <i class="ai-edit-alt text-primary"></i> </a>
+                        <a  href="{{ route('admin.testimonials.edit', ['testimonial' => $testimonial->id]) }}"> <i class="ai-edit-alt text-primary"></i> </a>
                         &nbsp;&nbsp;
-                        <a  type="button" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $expert->id }}" href="#"> <i class="ai-trash text-primary"></i> </a>
+                        <a  type="button" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $testimonial->id }}" href="#"> <i class="ai-trash text-primary"></i> </a>
                       </td>
                     </tr>
                     <!-- Delete modal -->
-                    <div id="deleteModal_{{ $expert->id }}" class="modal" tabindex="-1" role="dialog">
+                    <div id="deleteModal_{{ $testimonial->id }}" class="modal" tabindex="-1" role="dialog">
                       <div class="modal-dialog modal-lg"  role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h4> Delete {{ $expert->name }} </h4>
+                            <h4> Delete {{ $testimonial->en_title }} </h4>
                             <button class="btn-close text-primary" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body tab-content">
-                            <h3> Are you sure you want to delete this expert ? </h3>
-                            <form autocomplete="off" id="deleteForm_{{ $expert->id }}" method="post" action="{{ route('admin.experts.destroy', ['expert' => $expert->id]) }}">
+                            <h3> Are you sure you want to delete this testimonial ? </h3>
+                            <form autocomplete="off" id="deleteForm_{{ $testimonial->id }}" method="post" action="{{ route('admin.testimonials.destroy', ['testimonial' => $testimonial->id]) }}">
                               @csrf
                               @method('DELETE')
-                              <button type="submit" form="deleteForm_{{ $expert->id }}" class="btn btn-primary">Yes sure</button>
+                              <button type="submit" form="deleteForm_{{ $testimonial->id }}" class="btn btn-primary">Yes sure</button>
                               <button type="button" data-bs-dismiss="modal"  class="btn btn-dark"> No thanks </button>
                             </form>
                           </div>

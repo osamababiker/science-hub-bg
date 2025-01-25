@@ -11,7 +11,7 @@ class CategoriesController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        $categories = Category::with('blog')
+        $categories = Category::with('blogs')
             ->with('courses')->with('teachers')->get();
         return response()->json($categories, 200);
     }

@@ -34,11 +34,20 @@ class CategoriesController extends Controller
     public function store(Request $request){
         $request->validate([
             'en_name' => 'required|string',
-            'ar_name' => 'required|string'
+            'ar_name' => 'required|string',
+            'image' => 'required'
         ]);
         $category = new Category();
+
+        if($request->has('image')){
+            $image = $request->file('image');
+            $image_name = time().'_'. rand(1000, 9999). '.' .$image->extension();
+            $image->move(public_path('upload/categories'),$image_name);
+        }else $image_name = "";
+
         $category->en_name = $request->en_name;
         $category->ar_name = $request->ar_name;
+        $category->image = $image_name;
         $category->sub_of = $request->sub_of;
         $category->save();
         return redirect()->back()->with('feedback', 'category has been created');
@@ -65,8 +74,18 @@ class CategoriesController extends Controller
             'ar_name' => 'required|string'
         ]);
         $category = Category::findOrFail($id);
+
+        if($request->has('image')){
+            $image = $request->file('image');
+            $image_name = time().'_'. rand(1000, 9999). '.' .$image->extension();
+            $image->move(public_path('upload/categories'),$image_name);
+        }else{
+            $image_name = $course->image;
+        }
+
         $category->en_name = $request->en_name;
         $category->ar_name = $request->ar_name;
+        $category->image = $image_name;
         $category->sub_of = $request->sub_of;
         $category->save();
         return redirect()->back()->with('feedback', 'category has been updated');

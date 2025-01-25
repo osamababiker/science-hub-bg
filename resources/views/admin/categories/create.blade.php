@@ -13,7 +13,7 @@
           <div class="card-body pb-4">
             <!-- Feedback -->
                 @include('admin/components/feedback')
-                <form autocomplete="off" method="post" action="{{ route('admin.categories.store') }}">
+                <form autocomplete="off" method="post" action="{{ route('admin.categories.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3 mb-sm-4">
                     <label for="en_name" class="form-label">Category name (english)</label>
@@ -22,6 +22,10 @@
                     <div class="mb-3 mb-sm-4">
                     <label for="ar_name" class="form-label">Category name (arabic)</label>
                     <input type="text" class="form-control" name="ar_name" id="ar_name" placeholder="Enter category name in arabic">
+                    </div>
+                    <div class="mb-3 mb-sm-4">
+                    <label for="image" class="form-label">Category image</label>
+                    <input type="file" class="form-control" name="image" id="image">
                     </div>
                     <div class="mb-3 mb-sm-4">
                     <label for="sub_of" class="form-label">Sub of</label>

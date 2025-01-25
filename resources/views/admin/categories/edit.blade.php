@@ -13,7 +13,7 @@
           <div class="card-body pb-4">
             <!-- Feedback -->
                 @include('admin/components/feedback')
-                <form autocomplete="off" method="post" action="{{ route('admin.categories.update', ['category' => $category->id]) }}">
+                <form autocomplete="off" method="post" action="{{ route('admin.categories.update', ['category' => $category->id]) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-3 mb-sm-4">
@@ -23,6 +23,10 @@
                     <div class="mb-3 mb-sm-4">
                     <label for="ar_name" class="form-label">Category name (arabic)</label>
                     <input type="text" class="form-control" value="{{ $category->ar_name }}" name="ar_name" id="ar_name" placeholder="Enter project name in arabic">
+                    </div>
+                    <div class="mb-3 mb-sm-4">
+                    <label for="image" class="form-label">Category image</label>
+                    <input type="file" value="{{ $category->image }}" class="form-control" name="image" id="image">
                     </div>
                     <div class="mb-3 mb-sm-4">
                     <label for="sub_of" class="form-label">Sub of</label>

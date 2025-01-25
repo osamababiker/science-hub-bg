@@ -101,6 +101,7 @@ class CoursesController extends Controller
         return view('admin.courses.edit', [
             'course' => $course,
             'categories' => Category::all(),
+            'teachers' => Teacher::all(),
             'settings' => Settings::first()
         ]);
     }

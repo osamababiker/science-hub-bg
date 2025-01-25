@@ -25,6 +25,18 @@
                 <input type="text" name="ar_name" value="{{ $teacher->ar_name }}" class="form-control" id="ar_name" placeholder="Enter teacher name in arabic">
                 </div>
                 <div class="mb-3 mb-sm-4">
+                <label for="isFeatured" class="form-label">is featured teacher ?</label>
+                <select name="isFeatured" id="isFeatured" class="form-control">
+                  @if($teacher->isFeatured == 1)
+                    <option selected value="1">true</option>
+                    <option value="0">false</option>
+                  @else 
+                  <option selected value="0">false</option>
+                  <option value="1">true</option>
+                  @endif
+                </select>
+                </div>
+                <div class="mb-3 mb-sm-4">
                 <label for="role_en" class="form-label">teacher role (english)</label>
                 <input type="text" value="{{ $teacher->role_en }}" name="role_en" class="form-control" id="role" placeholder="Enter teacher role">
                 </div>

@@ -41,8 +41,12 @@
                 <input type="text" name="duration" value="{{ $course->duration }}" class="form-control" id="duration" placeholder="Enter course duration">
                 </div>
                 <div class="mb-3 mb-sm-4">
-                <label for="level" class="form-label">course level</label>
-                <input type="text" name="level" value="{{ $course->level }}" class="form-control" id="level" placeholder="Enter course level">
+                <label for="level_en" class="form-label">course level (english)</label>
+                <input type="text" value="{{ $course->level_en }}"  name="level_en" class="form-control" id="level_en" placeholder="Enter course level">
+                </div>
+                <div class="mb-3 mb-sm-4">
+                <label for="level_ar" class="form-label">course level (arabic)</label>
+                <input type="text" value="{{ $course->level_ar }}"  name="level_ar" class="form-control" id="level_ar" placeholder="Enter course level">
                 </div>
                 <div class="mb-3 mb-sm-4">
                 <label for="original_price" class="form-label">course original price</label>

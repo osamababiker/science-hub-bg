@@ -11,22 +11,28 @@
         <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4">
           <div class="card-body">
           <div class="row g-3 g-xl-4">
-              <div class="col-md-4 col-sm-6">
+              <div class="col-md-3 col-sm-6">
                 <div class="h-100 bg-secondary rounded-3 text-center p-4"> 
                   <h2 class="h6 pb-2 mb-1"> Messages</h2>
                   <div class="h2 text-primary mb-2">{{ $messages_count }}</div>
                 </div>
               </div>
-              <div class="col-md-4 col-sm-6">
+              <div class="col-md-3 col-sm-6">
                 <div class="h-100 bg-secondary rounded-3 text-center p-4">
-                  <h2 class="h6 pb-2 mb-1">Courses  </h2>
-                  <div class="h2 text-primary mb-2">{{ $courses_count }}</div>
+                  <h2 class="h6 pb-2 mb-1">Users  </h2>
+                  <div class="h2 text-primary mb-2">{{ $users_count }}</div>
                 </div>
               </div>
-              <div class="col-md-4 col-sm-12">
+              <div class="col-md-3 col-sm-12">
                 <div class="h-100 bg-secondary rounded-3 text-center p-4">
-                  <h2 class="h6 pb-2 mb-1">Teachers</h2>
-                  <div class="h2 text-primary mb-2">{{ $teachers_count }}</div>
+                  <h2 class="h6 pb-2 mb-1">Orders</h2>
+                  <div class="h2 text-primary mb-2">{{ $orders_count }}</div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <div class="h-100 bg-secondary rounded-3 text-center p-4">
+                  <h2 class="h6 pb-2 mb-1">Courses</h2>
+                  <div class="h2 text-primary mb-2">{{ $courses_count }}</div>
                 </div>
               </div>
             </div>

@@ -2,12 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\PartnersController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\TeachersController;
+use App\Http\Controllers\TestimonialsController;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +28,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+/** Auth APIs */
+Route::post('/login',[AuthController::class, 'login']);
+Route::post('/register',[AuthController::class, 'register']);
+Route::post('/update',[AuthController::class, 'update']);
+Route::post('/updatePassword',[AuthController::class, 'updatePassword']);
 /** categories APIs */
 Route::resource('categories', CategoriesController::class);
 /** blogs APIs */
@@ -37,3 +45,7 @@ Route::resource('messages', MessagesController::class);
 Route::resource('courses', CoursesController::class);
 /** teachers APIs */
 Route::resource('teachers', TeachersController::class);
+/** orders APIs */
+Route::resource('orders', OrdersController::class);
+/** testimonials APIs */
+Route::resource('testimonials', TestimonialsController::class);

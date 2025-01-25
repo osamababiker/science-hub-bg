@@ -14,8 +14,8 @@
             @include('admin/components/feedback')
             <!-- Orders accordion-->
             <section class="card border-0 mb-4" id="tables-color-borders">
-              <div class="card-body pb-0">
-                <h2 class="h4 mb-n2">members list</h2>
+              <div class="card-body pb-0 d-flex justify-content-between ">
+                <h2 class="h4 mb-n2">orders list</h2>
               </div>
               <div class="card-body">
                 <div class="tab-content">
@@ -24,40 +24,54 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>name</th>
-                      <th>email</th>
-                      <th>Phone</th>
-                      <th>role</th>
+                      <th>#</th>
+                      <th> username </th>
+                      <th> phone </th>
+                      <th> email </th>
+                      <th> course  </th>
+                      <th> payment status </th>
+                      <th> payment method </th>
                       <th>Created at</th>
                       <th>Settings</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($members as $member)
+                    @foreach($orders as $order)
                     <tr>
-                      <td>{{ $member->name }}</td>
-                      <td>{{ $member->email }}</td>
-                      <td>{{ $member->phone }}</td>
-                      <td>{{ $member->role }}</td>
-                      <td>{{ $member->created_at->diffForHumans() }}</td>
+                      <th scope="row">{{ $order->id }}</th>
+                      <td>{{ $order->user->name }}</td>
+                      <td>{{ $order->user->phone }}</td>
+                      <td>{{ $order->user->email }}</td>
+                      <td>{{ $order->course->en_name }}</td>
                       <td>
-                        <a  type="button" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $member->id }}" href="#"> <i class="ai-trash text-primary"></i> </a>
+                        @if($order->status == 0)
+                          <span>un paied</span>
+                        @else 
+                          <span> paied </span>
+                        @endif
+                      </td>
+                      <td>{{ $order->payment_method }}</td>
+                      <td>{{ $order->created_at->diffForHumans() }}</td>
+                      <td>
+                        <a  href="{{ route('admin.orders.edit', ['order' => $order->id]) }}"> <i class="ai-edit-alt text-primary"></i> </a>
+                        &nbsp;&nbsp;
+                        <a  type="button" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $order->id }}" href="#"> <i class="ai-trash text-primary"></i> </a>
                       </td>
                     </tr>
                     <!-- Delete modal -->
-                    <div id="deleteModal_{{ $member->id }}" class="modal" tabindex="-1" role="dialog">
+                    <div id="deleteModal_{{ $order->id }}" class="modal" tabindex="-1" role="dialog">
                       <div class="modal-dialog modal-lg"  role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h4> Delete member </h4>
+                            <h4> Delete {{ $order->en_title }} </h4>
                             <button class="btn-close text-primary" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body tab-content">
-                            <h3> Are you sure you want to delete this member ? </h3>
-                            <form autocomplete="off" id="deleteForm_{{ $member->id }}" method="post" action="{{ route('admin.members.destroy', ['member' => $member->id]) }}">
+                            <h3> Are you sure you want to delete this order ? </h3>
+                            <form autocomplete="off" id="deleteForm_{{ $order->id }}" method="post" action="{{ route('admin.orders.destroy', ['order' => $order->id]) }}">
                               @csrf
                               @method('DELETE')
-                              <button type="submit" form="deleteForm_{{ $member->id }}" class="btn btn-primary">Yes sure</button>
+                              <button type="submit" form="deleteForm_{{ $order->id }}" class="btn btn-primary">Yes sure</button>
                               <button type="button" data-bs-dismiss="modal"  class="btn btn-dark"> No thanks </button>
                             </form>
                           </div>
@@ -65,12 +79,11 @@
                       </div>
                     </div>
                     <!-- End delete modal -->
-
                     @endforeach
                   </div>
                   </tbody>
                 </table>
-                </div>
+              </div>
                   </div>
                 </div>
               </div>
